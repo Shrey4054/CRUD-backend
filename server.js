@@ -10,8 +10,8 @@ const taskListRoutes = require('./routes/taskListApi')
 const redirectRoutes = require('./middlewares/redirects')
 
 const app = express()
-const PORT = process.env.PORT
-const SECRET = process.env.SECRET
+const PORT = process.env.PORT || 3000
+const SECRET = process.env.SECRET || "dfhjsjakdfhsaot4uhfjdao;u4tsjai"
 
 app.use(cors())
 app.use(express.json())
@@ -35,7 +35,7 @@ app.use(session(
 
 app.use(sessionValidator)
 app.use('/Auth', AuthRoutes)
-app.use(express.static('../frontend'))
+
 app.use('/journal', journalRoutes)
 app.use('/taskList', taskListRoutes)
 app.use('/redirect',redirectRoutes)
