@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 
-const session = require('express-session')
+const session = require('cookie-session')
 const sessionValidator = require("./middlewares/sessionValidator")
 const journalRoutes = require('./routes/journalAPI')
 const AuthRoutes = require('./routes/Auth')
