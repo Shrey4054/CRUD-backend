@@ -13,7 +13,11 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const SECRET = process.env.SECRET || "dfhjsjakdfhsaot4uhfjdao;u4tsjai"
 
-app.use(cors())
+app.use(cors(
+    {
+        credentials: true
+    }
+))
 app.use(express.json())
 app.use(session(
     {
@@ -22,7 +26,8 @@ app.use(session(
         resave: false,
         cookie : {
             maxAge: 60 * 800 * 600,
-            secure: true
+            secure: true,
+            sameSite: "none"
         }
     }
 ))
