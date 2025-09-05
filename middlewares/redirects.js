@@ -6,16 +6,21 @@ const router = express.Router()
 const redirectLinkJournal = "/Journal/OnlineJournal.html" 
 const redirectLinkTaskList = "/tasklist/task-list.html"
 
-router.post("/protected", sessionValidator, (req,res) => {
 
+
+
+router.get("/protected", sessionValidator, (req,res) => {
+    return res.status(200).send({session :req.session.user})
 })
 
 
 router.post("/protected/tasklist", sessionValidator, (req,res) => {
+     console.log(req.session.user)
      res.status(200).send({link: redirectLinkTaskList})
 })
 
 router.post("/protected/journal", sessionValidator, (req,res) => {
+    console.log(req.session.user)
     res.status(200).send({link: redirectLinkJournal})
 })
 

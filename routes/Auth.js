@@ -42,7 +42,7 @@ router.post("/action/register", async (req, res) => {
       );
    
       const idResult = await pool.query("SELECT id FROM users where email = $1", [email])
-     const id = await idResult.rows[0].id
+      const id = await idResult.rows[0].id
       req.session.user = {id : id, email : email}
       return res.status(200).send({link: redirectLink})
     } catch (err) {
