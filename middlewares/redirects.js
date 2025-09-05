@@ -9,7 +9,7 @@ const redirectLinkTaskList = "/tasklist/task-list.html"
 
 
 
-router.get("/protected", sessionValidator, (req,res) => {
+router.get("/protected", (req,res) => {
     return res.status(200).send({session :req.session.user})
 })
 
