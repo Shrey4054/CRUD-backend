@@ -21,7 +21,8 @@ const SECRET = process.env.SECRET || "dfhjsjakdfhsaot4uhfjdao;u4tsjai"
 app.use(cors(
     {
         origin: allowedOrigins,
-        credentials: true
+        credentials: true,
+        methods: "*"
     }
 ))
 app.use(express.json())
