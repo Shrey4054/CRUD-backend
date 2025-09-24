@@ -46,7 +46,7 @@ app.use(express.json())
 
 
 app.get('/', (req,res) => {
-    req.session.user = (req.session.views || 0) + 1
+    req.session.views = (req.session.views || 0) + 1
     res.json(req.session.views + " views")
  
 })
