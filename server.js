@@ -22,7 +22,7 @@ app.use(cors(
     {
         origin: allowedOrigins,
         credentials: true,
-        methods: "*"
+        methods: ["GET","POST","PUT","DELETE","OPTIONS"]
     }
 ))
 app.use(express.json())
