@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 
-const session = require('cookie-session')
+const cookieSession = require('cookie-session')
 const sessionValidator = require("./middlewares/sessionValidator")
 const journalRoutes = require('./routes/journalAPI')
 const AuthRoutes = require('./routes/Auth')
@@ -17,9 +17,11 @@ const allowedOrigins = [
 
 const app = express()
 const PORT = process.env.PORT || 3000
-const SECRET = process.env.SECRET || "dfhjsjakdfhsaot4uhfjdao;u4tsjai"
+
 
 app.set('trust proxy', 1)
+
+
 
 app.use(cors(
     {
@@ -28,11 +30,10 @@ app.use(cors(
         methods: ["GET","POST","PUT","DELETE","OPTIONS"]
     }
 ))
-app.use(express.json())
-app.use('/test',testRoutes)
 
-app.use(session(
+app.use(cookieSession(
     {
+        name: "CRUD-cookie",
         secret: process.env.SECRET,
         saveUninitialized: false,
         resave: false,
@@ -43,6 +44,11 @@ app.use(session(
         }
     }
 ))
+
+
+app.use(express.json())
+app.use('/test',testRoutes)
+
 
 
 
