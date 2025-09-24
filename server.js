@@ -34,14 +34,10 @@ app.use(cors(
 app.use(cookieSession(
     {
         name: "CRUD-cookie",
-        secret: process.env.SECRET,
-        saveUninitialized: false,
-        resave: false,
-        cookie : {
-            maxAge: 60 * 800 * 600,
-            secure: true,
-            sameSite: "none"
-        }
+        keys: [process.env.SECRET || "hello"],
+        sameSite: "none",
+        secure: true
+        
     }
 ))
 
@@ -49,7 +45,11 @@ app.use(cookieSession(
 app.use(express.json())
 
 
-
+app.get('/', (req,res) => {
+    req.session.user = (req.session.views || 0) + 1
+    res.json(req.session.views + " views")
+ 
+})
 
 
 
