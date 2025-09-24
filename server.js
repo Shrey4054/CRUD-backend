@@ -33,7 +33,7 @@ app.use('/test',testRoutes)
 
 app.use(session(
     {
-        secret: SECRET,
+        secret: process.env.SECRET,
         saveUninitialized: false,
         resave: false,
         cookie : {
