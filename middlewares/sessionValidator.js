@@ -1,6 +1,6 @@
 function sessionValidator(req,res,next){
     console.log(`Before if else: ${req.session.user}`) //undefined why
-    const openPath  = ['/','/signup.css','/clientAuth.js', "/Auth/action","/Auth/action/register","/Auth/action/login","/test/test-secure", "/test","/test-secure"]
+    const openPath  = ['/','/signup.css','/clientAuth.js', "/Auth/action","/Auth/action/register","/Auth/action/login"]
     if(openPath.includes(req.path)) return next()
     if(req.session.user){
         console.log(`next : ${req.session.user}`)
