@@ -8,6 +8,7 @@ const journalRoutes = require('./routes/journalAPI')
 const AuthRoutes = require('./routes/Auth')
 const taskListRoutes = require('./routes/taskListApi')
 const redirectRoutes = require('./middlewares/redirects')
+const testRoutes = require('./routes/test')
 
 const allowedOrigins = [
     "https://crud-frontend-5lt9.onrender.com",
@@ -26,6 +27,8 @@ app.use(cors(
     }
 ))
 app.use(express.json())
+app.use('test',testRoutes)
+
 app.use(session(
     {
         secret: SECRET,
