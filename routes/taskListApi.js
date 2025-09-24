@@ -116,6 +116,7 @@ router.get('/retrieve', async(req,res) => {
 
 router.post('/save',async (req, res) => {
     const user_id = checkUserId(req,res)
+    console.log(`user_id from the /save ::${user_id}`)
     if (!user_id) return;
     
     try{

@@ -7,7 +7,9 @@ const redirectLinkJournal = "/Journal/OnlineJournal.html"
 const redirectLinkTaskList = "/tasklist/task-list.html"
 
 
-
+router.get('/', (req,res) => {
+    return res.status(200).send({"session": req.session.user})
+})
 
 router.get("/protected", (req,res) => {
     return res.status(200).send({session :req.session.user})
@@ -15,7 +17,7 @@ router.get("/protected", (req,res) => {
 
 
 router.post("/protected/tasklist", sessionValidator, (req,res) => {
-     console.log(req.session.user)
+     console.log(`logging from redirect: ${req.session.user}`)
      res.status(200).send({link: redirectLinkTaskList})
 })
 
