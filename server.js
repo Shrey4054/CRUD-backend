@@ -27,7 +27,7 @@ app.use(cors(
     }
 ))
 app.use(express.json())
-app.use('test',testRoutes)
+app.use('/test',testRoutes)
 
 app.use(session(
     {
