@@ -25,14 +25,14 @@ router.post('/action', async (req,res) => {
     const {text,title} = req.body
     
     const user_id = req.session.user?.id
-    const  date = Date.now()
+   
     if (!text && !title){
         return res.status(400).send("Missing text content")
     }
     text.trim()
     title.trim()
     try{
-    const result = await pool.query('INSERT INTO journal_entry (text,date,title,user_id) VALUES ($1,$2,$3,$4) RETURNING * ', [text,date,title,user_id])
+    const result = await pool.query('INSERT INTO journal_entry (text,date,title,user_id) VALUES ($1,$2,$3,$4) RETURNING * ', [text,new Date().toISOString(),title,user_id])
     const returnId = result.rows[0].id
     console.log(returnId)
     return res.status(201).send(returnId)
@@ -62,8 +62,8 @@ router.put('/action', async (req, res) => {
 
         
     
-    const date = Date.now()
-    await pool.query("UPDATE journal_entry SET date = $1, title = $2, text = $3 WHERE id = $4 AND user_id = $5", [date,title,text,id,user_id])
+
+    await pool.query("UPDATE journal_entry SET date = $1, title = $2, text = $3 WHERE id = $4 AND user_id = $5", [new Date().toISOString(),title,text,id,user_id])
     res.status(201).send(`Successful Updated the entry with id: ${id} title : ${title} `)
     }
     catch (err){
