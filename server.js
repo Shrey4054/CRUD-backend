@@ -12,7 +12,8 @@ const redirectRoutes = require('./middlewares/redirects')
 
 const allowedOrigins = [
     "https://crud-frontend-5lt9.onrender.com",
-    "https://raygunoxc.xyz"
+    "https://raygunoxc.xyz",
+    "http://127.0.0.1:5500/frontend/index.html"
 ];
 
 const app = express()
