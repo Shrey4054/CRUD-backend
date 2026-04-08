@@ -13,7 +13,7 @@ const redirectRoutes = require('./middlewares/redirects')
 const allowedOrigins = [
     "https://crud-frontend-5lt9.onrender.com",
     "https://raygunoxc.xyz",
-    "http://127.0.0.1:5500/frontend/index.html"
+    "http://127.0.0.1:5500"
 ];
 
 const app = express()
@@ -32,25 +32,41 @@ app.use(cors(
     }
 ))
 
+//deployed version
+
+// app.use(cookieSession(
+//     {
+//         name: "CRUD-cookie",
+//         keys: [process.env.SECRET || "hello"],
+//         sameSite: "none",
+//         secure: true
+        
+//     }
+// ))
+
+//for local testing only
+
 app.use(cookieSession(
     {
-        name: "CRUD-cookie",
+        name: 'CRUD-cookie',
         keys: [process.env.SECRET || "hello"],
-        sameSite: "none",
-        secure: true
+        secure: false,
+        sameSite: "lax",
+        maxAge: 60*60 * 1000 * 24
         
     }
 ))
 
-
 app.use(express.json())
 
 
-app.get('/', (req,res) => {
-    req.session.views = (req.session.views || 0) + 1
-    res.json(req.session.views + " views")
+// app.get('/', (req,res) => {
+//     console.log(req.session)
+//     req.session.views = (req.session.views || 0) + 1
+//     res.json(req.session.views + " views")
+//     console.log(req.session)
  
-})
+// })
 
 
 
@@ -58,8 +74,15 @@ app.get('/', (req,res) => {
 
 
 app.use(sessionValidator)
-app.use('/Auth', AuthRoutes)
 
+app.get('/', (req,res) => {
+    console.log(req.session)
+    req.session.views = (req.session.views || 0) + 1
+    res.json(req.session.views + " views")
+    console.log(req.session)
+ 
+})
+app.use('/Auth', AuthRoutes)
 app.use('/journal', journalRoutes)
 app.use('/taskList', taskListRoutes)
 app.use('/redirect',redirectRoutes)

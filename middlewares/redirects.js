@@ -3,9 +3,13 @@ const sessionValidator = require('../middlewares/sessionValidator')
 const router = express.Router()
 
 
-const redirectLinkJournal = "/Journal/OnlineJournal.html" 
-const redirectLinkTaskList = "/tasklist/task-list.html"
+// const redirectLinkJournal = "frontend/Journal/OnlineJournal.html" 
+// const redirectLinkTaskList = "/tasklist/task-list.html" cloud
 
+
+
+const redirectLinkJournal = "http://127.0.0.1:5500/frontend/Journal/OnlineJournal.html" 
+const redirectLinkTaskList = "http://127.0.0.1:5500/frontend/tasklist/task-list.html" //local
 
 router.get('/', (req,res) => {
     return res.status(200).send({"session": req.session.user})

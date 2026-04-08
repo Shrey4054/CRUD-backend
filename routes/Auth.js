@@ -5,7 +5,9 @@ const bcrypt = require("bcrypt");
 
 
 
-const redirectLink = "/nav/nav.html" 
+// const redirectLink = "/nav/nav.html" cloud
+
+const redirectLink = "http://127.0.0.1:5500/frontend/nav/nav.html" //local
 
 
 async function encrypt(password) {
@@ -43,7 +45,8 @@ router.post("/action/register", async (req, res) => {
    
       const idResult = await pool.query("SELECT id FROM users where email = $1", [email])
       const id = await idResult.rows[0].id
-      req.session.user = {id : id, email : email}
+      req.session.user = {id : id, email : email} //so this is not setting
+      
       return res.status(200).send({link: redirectLink})
     } catch (err) {
       console.error(err);
@@ -81,6 +84,7 @@ router.post("/action", async (req, res) => {
     
     
     req.session.user = {id : id, email : email}
+   
     console.log(req.session.user)
     return res.status(200).send({link: redirectLink})
   } catch (err) {
